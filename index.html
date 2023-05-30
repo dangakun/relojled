@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Reloj Dani</title>
+
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
+	<style type="text/css">
+		body{background-color: rgb(0 0 0 / 95%);}
+		.hora-on{
+			color: #fff !important;
+			background-color: #0d6efd !important;
+			border-color: #0d6efd !important;
+		}
+		.fecha-on{
+			color: #fff !important;
+			background-color: #198754 !important;
+			border-color: #198754 !important;
+		}
+		.horafecha-activa{
+			font-weight: bold;
+			/*text-transform: uppercase;*/
+		}
+		.hora-texto{
+			text-decoration: underline;
+			color: darkgray;
+		}
+		.fecha-texto{
+			text-decoration: underline;
+			color: gray;
+		}
+		.horafecha-activa .hora-texto{
+			color: red;
+		}
+		.horafecha-activa .fecha-texto{
+			color: blue;
+		}
+		.hide{
+			visibility: hidden !important;
+			display: none;
+		}
+		.show{
+			visibility: visible !important;
+			display: block;
+		}
+		.hr{display: none !important;}
+		.row-hr{margin: 1vh 0;}
+		/*.h3 > .icono{font-size:0.5rem;}*/
+		.horas,.minutos,.ampm{font-size: 2.5rem;color: rgb(0 0 0 / 50%) !important;}
+		.horas.btn-primary,.minutos.btn-success,.minutos.btn-danger{color:white !important;}
+		.ampm.btn-warning{color:darkblue !important;}
+		.hora-icono-on{color: rgba(255,165,0,0.2);}
+		.hora-icono-off{color: orange;}
+		.fecha-icono-on{color: rgba(255,165,0,0.2);}
+		.fecha-icono-off{color: orange;}
+	</style>
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pace-js@latest/pace-theme-default.min.css">
+	<script data-pace-options='{"ajax":false,"restartOnPushState":false,"restartOnRequestAfter":false,"eventLag":false}' src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+
+	<script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+	<script defer src="https://friconix.com/cdn/friconix.js"> </script> 
+</head>
+<body>
+	<div class="container-fluid text-center">
+		<div class="row"><div col="col-12">&nbsp;</div></div>
+		<div class="row row-hr"><div class="col-12"><hr class="hr"></div></div>
+		<div class="row row-hr"><div class="col-12"><div class="progress" style="height:1px !important;background-color:rgba(126,126,126,0.01) !important;"><div id="pb-seconds" class="progress-bar" role="progressbar" style="height:1px !important;width:0%;" aria-valuemin="0" aria-valuemax="100"></div></div></div></div>
+		<div class="row row-horas">
+			<div class="col-1"><button class="btn horas" id="reloj-hora-1" data-rel="pcontrol">1</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-2" data-rel="pcontrol">2</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-3" data-rel="pcontrol">3</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-4" data-rel="pcontrol">4</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-5" data-rel="pcontrol">5</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-6" data-rel="pcontrol">6</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-7" data-rel="pcontrol">7</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-8" data-rel="pcontrol">8</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-9" data-rel="pcontrol">9</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-10" data-rel="pcontrol">10</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-11" data-rel="pcontrol">11</button></div>
+			<div class="col-1"><button class="btn horas" id="reloj-hora-12" data-rel="pcontrol">12</button></div>
+		</div>
+		<div class="row row-hr"><div class="col-12"><hr class="hr"></div></div>
+		<div class="row row-minutos">
+			<div class="col-1">&nbsp;</div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto0-10" data-rel="pcontrol">10</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto0-20" data-rel="pcontrol">20</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto0-30" data-rel="pcontrol">30</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto0-40" data-rel="pcontrol">40</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto0-50" data-rel="pcontrol">50</button></div>
+			<div class="col-2" style="align-self: center;">
+				<button class="btn btn-secondary" id="reloj-hf" data-rel="pcontrol">
+					<span id="hf-hora">
+						<span class="mx-1 icono"><i class="hora-icono-on fi-cnluhl-clock"></i><i class="hora-icono-off fi-cnsuhl-clock-solid"></i></span>
+						<span class="hora-texto" data-rel="Hora" title="Hora"></span>
+					</span>
+					<span class="h4 mx-0" data-rel="&#215;" title="&#215;"></span>
+					<span id="hf-fecha">
+						<span class="mx-1 icono"><i class="fecha-icono-on fi-xtluxl-deadline-thin"></i><i class="fecha-icono-off fi-xnsuxl-deadline-solid"></i></span>
+						<span class="fecha-texto" data-rel="Fecha" title="Fecha"></span>
+					</span>
+				</button>
+			</div>
+			<div class="col-1"><button class="btn ampm" id="reloj-am" data-rel="pcontrol">AM</button></div>
+			<div class="col-1"><button class="btn ampm" id="reloj-pm" data-rel="pcontrol">PM</button></div>
+			<div class="col-1">&nbsp;</div>
+			<div class="col-1">&nbsp;</div>
+		</div>
+		<div class="row row-hr"><div class="col-12"><hr class="hr"></div></div>
+		<div class="row row-minutos">
+			<div class="col-1">&nbsp;</div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-1" data-rel="pcontrol">1</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-2" data-rel="pcontrol">2</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-3" data-rel="pcontrol">3</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-4" data-rel="pcontrol">4</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-5" data-rel="pcontrol">5</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-6" data-rel="pcontrol">6</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-7" data-rel="pcontrol">7</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-8" data-rel="pcontrol">8</button></div>
+			<div class="col-1"><button class="btn minutos" id="reloj-minuto-9" data-rel="pcontrol">9</button></div>
+			<div class="col-1">&nbsp;</div>
+			<div class="col-1">&nbsp;</div>
+		</div>
+		<div class="row row-hr"><div class="col-12"><hr class="hr"></div></div>
+	</div>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var fecha = new Date();
+			var horas = fecha.getHours();
+			var minutos = fecha.getMinutes();
+			var anio = fecha.getFullYear();
+			var horasArray = new Array(1,2,3,4,5,6,7,8,9,10,11,12);
+			var minutosArray = new Array(1,2,3,4,5,6,7,8,9);
+			var minutos10Array = new Array(10,20,30,40,50);
+			var apArray = new Array('aM','pM');
+			var horafecha = false;
+			const TIPO_HORA = 'hora';
+			const TIPO_MINUTO = 'minuto';
+			const TIPO_MINUTO_10 = 'minuto10';
+			const TIPO_MES = 'mes';
+			const TIPO_DIA = 'dia';
+			const TIPO_DIA_10 = 'dia10';
+			const CLASE_ACTIVA_HORA = 'btn-primary';
+			const CLASE_ACTIVA_MINUTO = 'btn-danger';
+			const CLASE_ACTIVA_MINUTO_10 = 'btn-success';
+			const CLASE_ACTIVA_AMPM = 'btn-warning';
+			const CLASE_ACTIVA_MES = 'btn-primary';
+			const CLASE_ACTIVA_DIA = 'btn-danger';
+			const CLASE_ACTIVA_DIA_10 = 'btn-success';
+
+
+			function forI(elemento,activar=true,tipo=TIPO_HORA,maximo=59,step=0){
+				let obj = horasArray;
+				let claseActiva = CLASE_ACTIVA_HORA;
+				switch(tipo){
+					case TIPO_HORA:
+						obj = horasArray;
+						claseActiva = CLASE_ACTIVA_HORA;
+					break;
+					case TIPO_MINUTO:
+						obj = minutosArray;
+						claseActiva = CLASE_ACTIVA_MINUTO;
+					break;
+					case TIPO_MINUTO_10:
+						obj = minutos10Array;
+						claseActiva = CLASE_ACTIVA_MINUTO_10;
+					break;
+					case TIPO_MES:
+						obj = horasArray;
+						claseActiva = CLASE_ACTIVA_MES;
+					break;
+					case TIPO_DIA:
+						obj = minutosArray;
+						claseActiva = CLASE_ACTIVA_DIA;
+					break;
+					case TIPO_DIA_10:
+						obj = minutos10Array;
+						claseActiva = CLASE_ACTIVA_DIA_10;
+					break;
+				}
+				let valor = 1;
+				for(x in obj){
+					valor = (obj[x] + step);
+					if(valor <= maximo){
+						if(activar){
+							activarElemento((elemento+valor),claseActiva);
+						}else{
+							desactivarElemento((elemento+valor),claseActiva);
+						}
+					}
+				}
+			}
+
+			function activarElemento(cualElemento,claseActiva){
+				$(cualElemento).addClass(claseActiva);
+			}
+
+			function desactivarElemento(cualElemento,claseActiva){
+				$(cualElemento).removeClass(claseActiva);
+			}
+
+			function marcarAMPM(queHora=12){
+				resetAMPM();
+				let ampm = (queHora >= 13) ? '#reloj-pm' : '#reloj-am';
+				activarElemento(ampm,CLASE_ACTIVA_AMPM);
+			}
+
+			function resetBotones(elem,cual,tam){
+				forI(elem, false, cual, tam);
+			}
+
+			function resetHoras(){
+				$('.horas').removeClass(CLASE_ACTIVA_HORA);
+				$('.horas').removeClass(CLASE_ACTIVA_MES);
+			}
+
+			function resetMinutos(){
+				$('.minutos').removeClass(CLASE_ACTIVA_MINUTO);
+				$('.minutos').removeClass(CLASE_ACTIVA_MINUTO_10);
+				$('.minutos').removeClass(CLASE_ACTIVA_DIA);
+				$('.minutos').removeClass(CLASE_ACTIVA_DIA_10);
+			}
+
+			function resetMeses(){
+				resetBotones('#reloj-hora-', TIPO_MES, horasArray.length);
+			}
+
+			function resetDias(){
+				resetBotones('#reloj-minuto-',  TIPO_DIA,    minutosArray.length);
+				resetBotones('#reloj-minuto0-', TIPO_DIA_10, minutos10Array.length);
+			}
+
+			function resetAMPM(){
+				let am = '#reloj-am';
+				let pm = '#reloj-pm';
+				desactivarElemento(am,CLASE_ACTIVA_AMPM);
+				desactivarElemento(pm,CLASE_ACTIVA_AMPM);
+			}
+
+			function marcarHoras(queHora=12){
+				resetHoras();
+				queHora = (queHora >= 13) ? (queHora - 12) : queHora;
+				queHora = (queHora == 0)  ? 12 : queHora;
+				let elemHora = '#reloj-hora-';
+				forI(elemHora,true,TIPO_HORA,queHora);
+			}
+
+			function marcarMinutos(queMinuto=59){
+				resetMinutos();
+				let pos0 = 0;
+				let pos1 = 0;
+				let pos2 = queMinuto.toString().substring(0,1);
+				if(queMinuto >= 10){
+					pos1 = pos2;
+					pos2 = queMinuto.toString().substring(1,2);
+				}
+				pos1 = (pos1 == '') ? 0 : (pos1+'0');
+				let elem = '#reloj-minuto-';
+				forI(elem,true,TIPO_MINUTO,pos2);
+				let elem10 = '#reloj-minuto0-';
+				forI(elem10,true,TIPO_MINUTO_10,pos1);
+			}
+
+			function chequearHoraFecha(){
+				let hfClass = new Array('horafecha-activa','h3');
+				$('#hf-hora').removeClass(hfClass);
+				$('#hf-fecha').removeClass(hfClass);
+				mostrar = (horafecha) ? 'fecha' : 'hora';
+				ocultar = (horafecha) ? 'fecha' : 'hora';
+				$('#hf-'+mostrar).addClass(hfClass);
+
+				let am = $('#reloj-am');
+				let pm = $('#reloj-pm');
+				resetAMPM();
+				if(horafecha){
+					let y1 = anio.toString().substring(0,2);
+					let y2 = anio.toString().substring(2,4);
+					am.html(y1);
+					pm.html(y2);
+					activarElemento($('#reloj-am'),CLASE_ACTIVA_AMPM);
+					activarElemento($('#reloj-pm'),CLASE_ACTIVA_AMPM);
+					$('#reloj-minuto0-40').hide();
+					$('#reloj-minuto0-50').hide();
+					$('#reloj-hf').removeClass('hora-on');
+					$('#reloj-hf').addClass('fecha-on');
+					$('.hora-icono-on').show();
+					$('.hora-icono-off').hide();
+					$('.fecha-icono-on').hide();
+					$('.fecha-icono-off').show();
+				}else{
+					am.html('AM');
+					pm.html('PM');
+					$('#reloj-minuto0-40').show();
+					$('#reloj-minuto0-50').show();
+					$('#reloj-hf').removeClass('fecha-on');
+					$('#reloj-hf').addClass('hora-on');
+					$('.hora-icono-on').hide();
+					$('.hora-icono-off').show();
+					$('.fecha-icono-on').show();
+					$('.fecha-icono-off').hide();
+				}
+				return horafecha;
+			}
+
+			function toggleHoraFecha(){
+				horafecha = !horafecha;
+				$('#reloj-hf').addClass('animate__animated');
+				$('#reloj-hf').addClass('animate__heartBeat');
+				$( "#reloj-hf" ).animate({
+					color: "red"
+				}, 500, "linear", function() {
+					console.log( "<div>Animation complete.</div>" );
+					$('#reloj-hf').removeClass('animate__animated');
+					$('#reloj-hf').removeClass('animate__heartBeat');
+				});
+				chequearHoraFecha();
+			}
+
+			function updateProgressBar(seg){
+				let per = ((seg*100)/60);
+				$('#pb-seconds').css('width',(per+'%'));
+				//$('#pb-seconds').html((per+'%'));
+			}
+
+			function checkReloj() {
+				fecha = new Date();
+				anio = fecha.getFullYear();
+				if(chequearHoraFecha()){
+					//fecha
+					horas = fecha.getMonth();
+					horas++;//se suma 1 porque el getMNonth traer el mes-1
+					minutos = fecha.getDate();
+					segundos = fecha.getSeconds();
+				}else{
+					//hora
+					horas = fecha.getHours();
+					minutos = fecha.getMinutes();
+					segundos = fecha.getSeconds();
+					marcarAMPM(horas);
+				}
+				marcarHoras(horas);
+				marcarMinutos(minutos);
+				updateProgressBar(segundos);
+			}
+
+			$('#reloj-hf').on('click',function(){toggleHoraFecha();});
+
+			checkReloj();
+			setInterval(checkReloj, 1000);
+		});
+	</script>
+</body>
+</html>
